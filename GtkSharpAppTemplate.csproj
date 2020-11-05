@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
+
+  <PropertyGroup>
+    <AssemblyName>GtkApp</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="**\*.glade" />
+    <EmbeddedResource Include="**\*.glade">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <Reference Include="AtkSharp" >
+      <HintPath>GtkSharpLib\AtkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CairoSharp" >
+      <HintPath>GtkSharpLib\CairoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GdkSharp" >
+      <HintPath>GtkSharpLib\GdkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GioSharp" >
+      <HintPath>GtkSharpLib\GioSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GLibSharp" >
+      <HintPath>GtkSharpLib\GLibSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GtkSharp" >
+      <HintPath>GtkSharpLib\GtkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PangoSharp" >
+      <HintPath>GtkSharpLib\PangoSharp.dll</HintPath>
+    </Reference> 
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY $(ProjectDir)Gtk3Runtime\* $(ProjectDir)$(OutDir) /s /i /y" />
+  </Target>
+
+</Project>
