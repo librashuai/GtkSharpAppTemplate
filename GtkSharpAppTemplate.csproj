@@ -33,10 +33,11 @@
     <Reference Include="PangoSharp" >
       <HintPath>GtkSharpLib\PangoSharp.dll</HintPath>
     </Reference> 
+    <GTKRuntime Include="$(ProjectDir)Gtk3Runtime\*"/>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="XCOPY $(ProjectDir)Gtk3Runtime\* $(ProjectDir)$(OutDir) /s /i /y" />
+    <Copy SourceFiles="@(GTKRuntime)" DestinationFolder="$(ProjectDir)$(OutDir)"/>
   </Target>
 
 </Project>
